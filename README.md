@@ -1,5 +1,6 @@
-# test-task
+# Тестове завдання
 
+> [!info] Installation
 ## Project setup
 ```
 npm install

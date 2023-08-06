@@ -1,0 +1,13 @@
+$box-shadow-easy: 0 1rem 2rem rgba($black, 0.2);
+$box-shadow-heavy: 0 1.5rem 4rem rgba($black, 0.2);
+$text-shadow-heavy: 0 1rem 2rem rgba($black, 0.2);
+$text-shadow-easy: 0 0.5rem 1rem rgba($white, 0.2);
+
+$translateFunction: ease-in-out;
+$translateTime: 0.5s;
+
+//TRANSITIONS
+$transition-fast: all $duration-animation-fast;
+$transition-base: all $duration-animation-base;
+$transition-long: all $duration-animation-long;
+$transition-appear: all $duration-appear;

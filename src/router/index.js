@@ -1,27 +1,49 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-
+import NProgress from 'nprogress';
+import store from '@/store'
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
-    name: 'home',
-    component: HomeView
+    path: "/",
+    redirect: '/auth'
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    path: "/auth",
+    name: "auth",
+    component: () =>
+      import(/* webpackChunkName: "auth" */ "../views/AuthView.vue"),
+  },
+  {
+    path: "/user-todos",
+    name: "user-todos",
+    component: () =>
+      import(/* webpackChunkName: "user-todos" */ "../views/UserTodosView.vue"),
+  },
+  {
+    path: "*",
+    redirect: "/user-todos"
   }
-]
+];
 
 const router = new VueRouter({
-  routes
-})
+  routes,
+  mode: 'history'
+});
 
-export default router
+router.beforeResolve((to, from, next) => {
+  if (to.name) {
+    NProgress.start();
+  }
+  if (to.path === '/user-todos' && !store.getters['user/isLoggedIn']) {
+    next('/auth')
+  }
+  next();
+});
+
+router.afterEach(() => {
+  NProgress.done();
+});
+
+export default router;

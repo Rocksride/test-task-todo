@@ -1,0 +1,54 @@
+
+// media query MANAGER
+/*
+0 - 400: phone-small
+0 - 600px: Phone
+600 - 900px:    Tablet portrait
+900 - 1200px:   Tablet landscape
+[1200-1800] is where our normal styles apply
+1800px+:        Big Desktop
+$breakpoint argument choices:
+- phone-small
+- phone
+- tab-port
+- tab-land
+- big-desktop
+ORDER: Base + typography > general layout + grid > page layout > components
+*/
+
+@mixin respond($breakpoint) {
+  @if $breakpoint==phone-small {
+      @media only screen and (max-width: 25em) { @content } ; // 400px
+  }
+  @if $breakpoint==phone {
+      @media only screen and (max-width: 37.5em) { @content } ; // 600px
+  }
+  @if $breakpoint==tab-port {
+      //900px
+      @media only screen and (max-width: 56.25em) { @content } ; // 900px
+  }
+  @if $breakpoint==tab-land {
+      //1200px
+      @media only screen and (max-width: 75em) { @content } ; // 1200px
+  }
+  @if $breakpoint==desktop {
+      //1200px
+      @media only screen and (max-width: 112.5em) { @content } ; // < 1800px
+  }
+  @if $breakpoint==big-desktop {
+      //1800px
+      @media only screen and (min-width: 112.5em) { @content } ; // 1800px
+  }
+}
+
+
+@mixin notificationFactory($color) {
+  border-left: 0.5rem solid $color;
+  border-bottom: 0.2rem dashed lighten($color, 10%);
+}
+
+
+@mixin translateTransition {
+    transform: none;
+    transition: all $translateTime $translateFunction;
+  }
