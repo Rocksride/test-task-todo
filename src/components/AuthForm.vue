@@ -1,43 +1,47 @@
 <template>
-  <form @submit.prevent class="form">
+  <form class="form" @submit.prevent="submit">
     <h2 class="form__title">description</h2>
     <div class="form__container">
       <p class="form__subtitle">description</p>
       <label class="form__group">
-        <template v-if="$v.userName.$error">
-          <p v-if="!$v.userName.required" class="errorMessage">
-            Please enter username
-          </p>
-          <p v-else-if="!$v.userName.alpha" class="errorMessage">
-            Only letters are allowed
-          </p>
-        </template>
+        <p v-show="$v.userName.$error && !$v.userName.required" id="username-error-required" class="errorMessage">
+          Please enter username
+        </p>
+        <p v-show="$v.userName.$error && !$v.userName.alpha" id="username-error-validation" class="errorMessage">
+          Only letters are allowed
+        </p>
+        <span hidden id="username-info">Username input</span>
         <input
           placeholder="Username"
           class="form__input"
           type="text"
           v-model="userName"
+          autocomplete="username"
+          aria-labelledby="username-short-info"
+          aria-describedby="username-error-required username-error-validation"
           @blur="$v.userName.$touch()"
         />
       </label>
       <label class="form__group">
-        <template v-if="$v.phoneNumber.$error">
-          <p v-if="!$v.phoneNumber.required" class="errorMessage">
-            Please enter phoneNumber
-          </p>
-          <p v-else-if="!$v.phoneNumber.numAndSymbols" class="errorMessage">
-            Only numbers and special symbols are allowed
-          </p>
-        </template>
+        <p v-show="$v.phoneNumber.$error && !$v.phoneNumber.required" id="phone-error-required" class="errorMessage">
+          Please enter phoneNumber
+        </p>
+        <p v-show="$v.phoneNumber.$error && !$v.phoneNumber.numAndSymbols" id="phone-error-validation" class="errorMessage">
+          Only numbers and special symbols are allowed
+        </p>
+        <span hidden id="phone-span">Phone number input</span>
         <input
           placeholder="Phone Number"
           class="form__input"
           type="tel"
           v-model="phoneNumber"
+          autocomplete="tel"
+          aria-labelledby="phone-short-info"
+          aria-describedby="phone-error-required phone-error-validation"
           @blur="$v.phoneNumber.$touch()"
         />
       </label>
-      <button class="form__button" type="button" @click="submit"
+      <button class="form__button" type="submit"
         :disabled="$v.$error"
       >Register</button>
     </div>
@@ -45,13 +49,13 @@
 </template>
 
 <script>
-import { required, number, alpha, helpers } from "vuelidate/lib/validators";
+import { required, alpha, helpers } from "vuelidate/lib/validators";
 const numAndSymbols = helpers.regex("numAndSymbols", /^[0-9x\-\(\)\s\.]*$/i);
 export default {
   name: "AuthForm",
   data: () => ({
     userName: "Antonette",
-    phoneNumber: '010-692-6593 x09125',
+    phoneNumber: '010-692-6593 x09125'
   }),
   methods: {
     async submit() {
@@ -129,8 +133,6 @@ export default {
     @include respond(tab-land) {
       margin-bottom: 20px;
     }
-  }
-  &__label {
   }
   &__input {
     outline: none;
