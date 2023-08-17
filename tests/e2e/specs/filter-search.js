@@ -10,9 +10,9 @@ describe('Filter/Search functionality', () => {
     cy.get('.list>li').should('have.length', 1)
 
     cy.get('.status-select').select('all')
-    cy.get(':nth-child(1) > .con-like > .like')
-    cy.get(':nth-child(2) > .con-like > .like')
-    cy.get(':nth-child(3) > .con-like > .like')
+    cy.get(':nth-child(1) > .con-like > .like').click()
+    cy.get(':nth-child(2) > .con-like > .like').click()
+    cy.get(':nth-child(3) > .con-like > .like').click()
     cy.get('.status-select').select('favorite')
     cy.get('.list>li').should('have.length', 3)
 
