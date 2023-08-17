@@ -4,12 +4,8 @@
     <div class="form__container">
       <p class="form__subtitle">description</p>
       <label class="form__group">
-        <p v-show="$v.userName.$error && !$v.userName.required" id="username-error-required" class="errorMessage">
-          Please enter username
-        </p>
-        <p v-show="$v.userName.$error && !$v.userName.alpha" id="username-error-validation" class="errorMessage">
-          Only letters are allowed
-        </p>
+        <p v-show="$v.userName.$error && !$v.userName.required" id="username-error-required" class="errorMessage">Please enter username</p>
+        <p v-show="$v.userName.$error && !$v.userName.alpha" id="username-error-validation" class="errorMessage">Only letters are allowed</p>
         <span hidden id="username-info">Username input</span>
         <input
           placeholder="Username"
@@ -23,12 +19,8 @@
         />
       </label>
       <label class="form__group">
-        <p v-show="$v.phoneNumber.$error && !$v.phoneNumber.required" id="phone-error-required" class="errorMessage">
-          Please enter phoneNumber
-        </p>
-        <p v-show="$v.phoneNumber.$error && !$v.phoneNumber.numAndSymbols" id="phone-error-validation" class="errorMessage">
-          Only numbers and special symbols are allowed
-        </p>
+        <p v-show="$v.phoneNumber.$error && !$v.phoneNumber.required" id="phone-error-required" class="errorMessage">Please enter phone number</p>
+        <p v-show="$v.phoneNumber.$error && !$v.phoneNumber.numAndSymbols" id="phone-error-validation" class="errorMessage">Only numbers and special symbols are allowed</p>
         <span hidden id="phone-span">Phone number input</span>
         <input
           placeholder="Phone Number"

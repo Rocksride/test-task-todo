@@ -1,4 +1,8 @@
 describe('route coverage', () => {
+  beforeEach(() => {
+    localStorage.clear();
+    sessionStorage.clear();
+  })
   it('should render auth form', () => {
     cy.visit('/')
     cy.url().should('include', '/auth')
