@@ -1,13 +1,19 @@
-// https://docs.cypress.io/api/table-of-contents
-
 describe('route coverage', () => {
   it('should render auth form', () => {
     cy.visit('/')
-    cy.contains('h2', 'description')
+    cy.url().should('include', '/auth')
   })
   it('should not allow accessing /user-todos for unregistered users', () => {
     cy.visit('/user-todos')
-    cy.contains('h2', 'description')
+    cy.url().should('include', '/auth')
   })
-
+  it('should redirect to "/ if route * and not logined', () => {
+    cy.visit('/custom-path')
+    cy.url().should('include', '/auth')
+  })
+  it('should redirect to "/user-todos if route * and logined', () => {
+    cy.auth({})
+    cy.visit('/custom-path')
+    cy.url().should('include', '/user-todos')
+  })
 })
